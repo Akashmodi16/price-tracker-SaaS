@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Price Tracker Dashboard</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .card {
+            background: white;
+            padding: 15px;
+            margin: 10px auto;
+            width: 60%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .price {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>📊 Price Tracker Dashboard</h1>
+
+<div id="products"></div>
+<div style="width: 80%; margin: 30px auto;">
+    <canvas id="chart"></canvas>
+</div>
+
+<script>
+let chartInstance = null;
+
+async function loadProducts() {
+    const response = await fetch("http://127.0.0.1:8000/products");
+    const data = await response.json();
+
+    const container = document.getElementById("products");
+
+    data.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "card";
+
+        div.innerHTML = `
+            <p><strong>Product:</strong> ${item.url}</p>
+            <p class="price">₹ ${item.price}</p>
+            <button onclick="loadChart(${item.id})">View History</button>
+        `;
+
+        container.appendChild(div);
+    });
+}
+
+async function loadChart(productId) {
+    const res = await fetch(`http://127.0.0.1:8000/history/${productId}`);
+    const data = await res.json();
+
+    const prices = data.map(d => d.price);
+    const labels = data.map(d => new Date(d.timestamp).toLocaleTimeString());
+
+    const ctx = document.getElementById("chart").getContext("2d");
+
+    // Remove old chart
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+
+    chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Price Trend',
+                data: prices
+            }]
+        }
+    });
+}
+
+loadProducts();
+</script>
+
+</body>
+</html>
