@@ -16,9 +16,6 @@ A full-stack price tracking system that monitors product prices and sends alerts
 - SendGrid
 - HTML/CSS/JavaScript
 
-## 📸 Demo
-(Add screenshots here)
-
 ## ⚙️ Run Locally
 ```bash
 uvicorn app.main:app --reload
