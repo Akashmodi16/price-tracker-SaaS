@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Smart Price Tracker",
+  "version": "1.0",
+  "description": "Track product prices and get alerts. Monetized with affiliate links.",
+  
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Price Tracker"
+  },
+
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications",
+    "activeTab",
+    "scripting"
+  ],
+
+  "host_permissions": [
+    "<all_urls>"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_script.js"]
+    }
+  ]
+}

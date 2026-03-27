@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Price Tracker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 300px;
+            margin: 0;
+            background: #f5f6fa;
+        }
+
+        .header {
+            background: #1e272e;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #0fbcf9;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0c9cd8;
+        }
+
+        #status {
+            margin-top: 10px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        canvas {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        💰 Price Tracker Dashboard
+    </div>
+
+    <div class="container">
+        
+        <!-- Optional URL input -->
+        <input id="urlInput" placeholder="Paste product URL (optional)" />
+
+        <!-- Track button -->
+        <button id="trackBtn">Track Product</button>
+
+        <!-- Status message -->
+        <div id="status"></div>
+
+        <!-- Chart (future use) -->
+        <canvas id="priceChart" width="280" height="150"></canvas>
+
+    </div>
+
+    <!-- ✅ LOCAL SCRIPTS ONLY (CSP SAFE) -->
+    <script src="chart.js"></script>
+    <script src="popup.js"></script>
+
+</body>
+</html>
